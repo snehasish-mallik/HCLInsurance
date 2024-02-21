@@ -1,0 +1,85 @@
+﻿@model IEnumerable<HCLInsurance.Models.ClaimModel>
+
+@{
+    ViewData["Title"] = "ClaimList";
+}
+
+<style>
+    h1 {
+        text-align: center;
+        margin-bottom: 20px;
+        
+    }
+
+    table {
+        max-width: 1200px; /* Increased max-width */
+        margin: auto;
+        margin-top: 10px; /* Adjusted margin-top */
+        background-color: #f8f9fa;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+    }
+
+    th, td {
+        text-align: center;
+        
+        padding: 20px 0; /* Increased padding */
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    .btn-primary {
+        padding: 10px 20px; /* Adjusted padding */
+    }
+
+    .details-link {
+        color: #007bff;
+    }
+
+    .delete-link {
+        color: #dc3545;
+    }
+</style>
+
+<h1>ClaimList</h1>
+
+<p>
+    <a asp-action="PolicyList" class="btn btn-primary">Create New Claim</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.DateCreated)</th>
+            <th>@Html.DisplayNameFor(model => model.Policy.PolicyName)</th>
+            <th>@Html.DisplayNameFor(model => model.Policy.Amount)</th>
+            <th>@Html.DisplayNameFor(model => model.ClaimAmount)</th>
+            <th>@Html.DisplayNameFor(model => model.ApprovedAmount)</th>
+            <th style="min-width: 300px;">@Html.DisplayNameFor(model => model.Feedback)</th> <!-- Adjusted min-width -->
+            <th>@Html.DisplayNameFor(model => model.Status)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.DateCreated)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Policy.PolicyName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Policy.Amount)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ClaimAmount)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ApprovedAmount)</td>
+                    <td style="max-width: 300px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">@Html.DisplayFor(modelItem => item.Feedback)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Status)</td>
+                    <td>
+                        <a href="@Url.Action("ClaimDetail", "User", new { ClaimId = item.ClaimId })" class="details-link">Details</a>
+                        ||
+                        <a href="@Url.Action("DeleteClaim", "User", new { ClaimId = item.ClaimId })" class="delete-link">Delete</a>
+                    </td>
+                </tr>
+        }
+    </tbody>
+</table>

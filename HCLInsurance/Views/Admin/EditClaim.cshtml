@@ -1,0 +1,75 @@
+﻿@model HCLInsurance.Models.ClaimModel
+
+@{
+    ViewData["Title"] = "EditClaim";
+}
+
+<h1>EditClaim</h1>
+
+<h4>ClaimModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditClaim">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ClaimId" />
+            <div class="form-group">
+                <label asp-for="DateCreated" class="control-label"></label>
+                <input asp-for="DateCreated" class="form-control" readonly />
+                <span asp-validation-for="DateCreated" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Reason" class="control-label"></label>
+                <input asp-for="Reason" class="form-control" readonly/>
+                <span asp-validation-for="Reason" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ClaimPercentage" class="control-label"></label>
+                <input asp-for="ClaimPercentage" class="form-control" readonly/>
+                <span asp-validation-for="ClaimPercentage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ClaimAmount" class="control-label"></label>
+                <input asp-for="ClaimAmount" class="form-control" readonly/>
+                <span asp-validation-for="ClaimAmount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Status" class="control-label"></label>
+                <select asp-for="Status" class="form-control">
+                    <option value="SelectOne">Select One</option>
+                    <option value="Accepted">Accepted</option>
+                    <option value="Rejected">Rejected</option>
+                </select>
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+
+            <div class="form-group" id="approvedAmountField" style="display:none;">
+                <label asp-for="ApprovedAmount" class="control-label"></label>
+                <input asp-for="ApprovedAmount" class="form-control" />
+                <span asp-validation-for="ApprovedAmount" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Feedback" class="control-label"></label>
+                <input asp-for="Feedback" class="form-control" />
+                <span asp-validation-for="Feedback" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+        <script>
+            // Add event listener to the Status dropdown
+            document.getElementById('Status').addEventListener('change', function () {
+                var approvedAmountField = document.getElementById('approvedAmountField');
+
+                // Show or hide the ApprovedAmount field based on the selected Status
+                approvedAmountField.style.display = this.value === 'Accepted' ? 'block' : 'none';
+            });
+        </script>
+}

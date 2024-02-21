@@ -1,0 +1,82 @@
+﻿@model IEnumerable<HCLInsurance.Models.ClaimModel>
+
+@{
+    ViewData["Title"] = "ClaimList";
+}
+
+<style>
+    h1 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+
+    th, td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    
+
+    tr:hover {
+        background-color: #f5f5f5;
+    }
+
+    a.btn-status {
+        display: inline-block;
+        padding: 8px 16px;
+        margin: 5px;
+        text-align: center;
+        text-decoration: none;
+        background-color: #6c757d;
+        color: #fff;
+        border-radius: 5px;
+        transition: background-color 0.3s ease-in-out;
+    }
+
+    a.btn-status:hover {
+        background-color: #545b62;
+    }
+</style>
+
+<h1>ClaimList</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.DateCreated)</th>
+            <th>@Html.DisplayNameFor(model => model.Policy.User.Email)</th>
+            <th>@Html.DisplayNameFor(model => model.Policy.PolicyName)</th>
+            <th>@Html.DisplayNameFor(model => model.Policy.Amount)</th>
+            <th>@Html.DisplayNameFor(model => model.ClaimAmount)</th>
+            <th>@Html.DisplayNameFor(model => model.Reason)</th>
+            <th>@Html.DisplayNameFor(model => model.ApprovedAmount)</th>
+            <th>@Html.DisplayNameFor(model => model.Status)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.DateCreated)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Policy.User.Email)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Policy.PolicyName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Policy.Amount)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ClaimAmount)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Reason)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ApprovedAmount)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Status)</td>
+                    <td>
+                        <a href="@Url.Action("ClaimDetail","Admin", new {ClaimId= item.ClaimId})" class="btn-status">Change Status</a> 
+                    </td>
+                </tr>
+        }
+    </tbody>
+</table>

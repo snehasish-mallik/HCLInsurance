@@ -1,0 +1,95 @@
+﻿@model HCLInsurance.Models.UserModel
+
+@{
+    ViewBag.Title = "LogIn";
+}
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    .login-container {
+        max-width: 400px;
+        margin: auto;
+        margin-top: 50px;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    label {
+        font-weight: bold;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        color: #fff;
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    h3 {
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    .alert {
+        border-radius: 5px;
+    }
+</style>
+
+<div class="login-container">
+    <h2 class="text-center">Login</h2>
+
+    @if (ViewBag.ErrorMessage != null)
+    {
+            <div class="alert alert-danger" role="alert">
+            @ViewBag.ErrorMessage
+            </div>
+    }
+
+    @using (Html.BeginForm("LogIn", "Home", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+            <div class="form-group">
+            @Html.LabelFor(model => model.Email)
+            @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+            @Html.LabelFor(model => model.Password)
+            @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+            @Html.LabelFor(model => model.Role)
+            @Html.DropDownListFor(model => model.Role, new SelectList(new[] { "Select Role", "Admin", "User" }), new { @class = "form-control" })
+                <span asp-validation-for="Role" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Login</button>
+    }
+
+    <h3 class="text-center">New User? <a asp-area="" asp-controller="User" asp-action="Register">Register!</a></h3>
+</div>

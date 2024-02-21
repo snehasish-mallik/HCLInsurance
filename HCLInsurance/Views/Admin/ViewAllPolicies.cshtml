@@ -1,0 +1,78 @@
+﻿@model IEnumerable<HCLInsurance.Models.PolicyModel>
+
+@{
+    ViewData["Title"] = "PolicyList";
+}
+
+<h1>PolicyList</h1>
+
+@if (Model.Any())
+{
+        <div class="container">
+            <h2>Motor Policies</h2>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.PolicyId)</th>
+                        <th>@Html.DisplayNameFor(model => model.User.Email)</th>
+                        <th>@Html.DisplayNameFor(model => model.PolicyName)</th>
+                        <th>@Html.DisplayNameFor(model => model.PolicyType)</th>
+                        <th>@Html.DisplayNameFor(model => model.VehicleRegistration)</th>
+                        <th>@Html.DisplayNameFor(model => model.Amount)</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach (var item in Model.Where(policy => policy.PolicyName == "Motor"))
+                {
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.PolicyId)</td>
+                                <td>@Html.DisplayFor(modelItem => item.User.Email)</td>
+                                <td>@Html.DisplayFor(modelItem => item.PolicyName)</td>
+                                <td>@Html.DisplayFor(modelItem => item.PolicyType)</td>
+                                <td>@Html.DisplayFor(modelItem => item.VehicleRegistration)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Amount)</td>
+                                <td>
+                                    <!-- Additional actions or details for Motor policies -->
+                                </td>
+                            </tr>
+                }
+                </tbody>
+            </table>
+
+            <h2>Home Policies</h2>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.PolicyId)</th>
+                        <th>@Html.DisplayNameFor(model => model.User.Email)</th>
+                        <th>@Html.DisplayNameFor(model => model.PolicyName)</th>
+                        <th>@Html.DisplayNameFor(model => model.PolicyType)</th>
+                        <th>@Html.DisplayNameFor(model => model.Pincode)</th>
+                        <th>@Html.DisplayNameFor(model => model.Amount)</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach (var item in Model.Where(policy => policy.PolicyName == "Home"))
+                {
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.PolicyId)</td>
+                                <td>@Html.DisplayFor(modelItem => item.User.Email)</td>
+                                <td>@Html.DisplayFor(modelItem => item.PolicyName)</td>
+                                <td>@Html.DisplayFor(modelItem => item.PolicyType)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Pincode)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Amount)</td>
+                                <td>
+                                    <!-- Additional actions or details for Home policies -->
+                                </td>
+                            </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+}
+else
+{
+        <p>No policies available.</p>
+}

@@ -1,0 +1,83 @@
+﻿@model IEnumerable<HCLInsurance.Models.PolicyModel>
+
+@{
+    ViewData["Title"] = "PolicyList";
+}
+
+<h4><strong>PolicyList</strong></h4>
+<a href="@Url.Action("CreatePolicy", "User")" class="details-link">Create New Policy</a>
+
+
+@if (Model.Any())
+{
+        <div class="container">
+            <h6><strong>Motor Policies</strong></h6>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.PolicyId)</th>
+                        <th>@Html.DisplayNameFor(model => model.User.Email)</th>
+                        <th>@Html.DisplayNameFor(model => model.PolicyName)</th>
+                        <th>@Html.DisplayNameFor(model => model.PolicyType)</th>
+                        <th>@Html.DisplayNameFor(model => model.VehicleRegistration)</th>
+                        <th>@Html.DisplayNameFor(model => model.Amount)</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach (var item in Model.Where(policy => policy.PolicyName == "Motor"))
+                {
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.PolicyId)</td>
+                                <td>@Html.DisplayFor(modelItem => item.User.Email)</td>
+                                <td>@Html.DisplayFor(modelItem => item.PolicyName)</td>
+                                <td>@Html.DisplayFor(modelItem => item.PolicyType)</td>
+                                <td>@Html.DisplayFor(modelItem => item.VehicleRegistration)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Amount)</td>
+                                <td>
+                                    <!-- Additional actions or details for Motor policies -->
+                                            <a href="@Url.Action("CreateClaim", "User", new { ClaimId = item.PolicyId })" class="details-link">Raise Claim</a>
+                  
+                                </td>
+                            </tr>
+                }
+                </tbody>
+            </table>
+
+                <h2><strong>Home Policies</strong></h2>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.PolicyId)</th>
+                        <th>@Html.DisplayNameFor(model => model.User.Email)</th>
+                        <th>@Html.DisplayNameFor(model => model.PolicyName)</th>
+                        <th>@Html.DisplayNameFor(model => model.PolicyType)</th>
+                        <th>@Html.DisplayNameFor(model => model.Pincode)</th>
+                        <th>@Html.DisplayNameFor(model => model.Amount)</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach (var item in Model.Where(policy => policy.PolicyName == "Home"))
+                {
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.PolicyId)</td>
+                                <td>@Html.DisplayFor(modelItem => item.User.Email)</td>
+                                <td>@Html.DisplayFor(modelItem => item.PolicyName)</td>
+                                <td>@Html.DisplayFor(modelItem => item.PolicyType)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Pincode)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Amount)</td>
+                                <td>
+                                    <!-- Additional actions or details for Home policies -->
+                                            <a href="@Url.Action("CreateClaim", "User", new { PolicyId = item.PolicyId })">Raise Claim</a>
+                                </td>
+                            </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+}
+else
+{
+        <p>No policies available.</p>
+}

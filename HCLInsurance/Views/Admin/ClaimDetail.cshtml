@@ -1,0 +1,57 @@
+﻿@model HCLInsurance.Models.ClaimModel
+
+@{
+    ViewData["Title"] = "Claim Details";
+}
+
+<h1 class="mt-4 mb-4">Claim Details</h1>
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Claim Model</h4>
+        <hr />
+
+        <dl class="row">
+            <dt class="col-sm-3">Date Created</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.DateCreated)</dd>
+
+            <dt class="col-sm-3">Claim ID</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.ClaimId)</dd>
+
+            <dt class="col-sm-3">User Name</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.Policy.User.UserName)</dd>
+
+            <dt class="col-sm-3">Email</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.Policy.User.Email)</dd>
+
+            <dt class="col-sm-3">Policy ID</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.PolicyId)</dd>
+
+            <dt class="col-sm-3">Policy Name</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.Policy.PolicyName)</dd>
+
+            <dt class="col-sm-3">Claim Percentage</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.ClaimPercentage)</dd>
+
+            <dt class="col-sm-3">Claim Amount</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.ClaimAmount)</dd>
+
+            <dt class="col-sm-3">Reason</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.Reason)</dd>
+
+            <dt class="col-sm-3">Approved Amount</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.ApprovedAmount)</dd>
+
+            <dt class="col-sm-3">Feedback</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.Feedback)</dd>
+
+            <dt class="col-sm-3">Status</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.Status)</dd>
+        </dl>
+    </div>
+</div>
+
+<div class="mt-4">
+    <a href="@Url.Action("EditClaim", "Admin", new { ClaimId = Model.ClaimId })" class="btn btn-primary">Edit Claim</a>
+    <a asp-action="ViewAllClaims" class="btn btn-secondary ml-2">Back to List</a>
+</div>
