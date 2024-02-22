@@ -36,7 +36,7 @@
                                 <td>@Html.DisplayFor(modelItem => item.Amount)</td>
                                 <td>
                                     <!-- Additional actions or details for Motor policies -->
-                                            <a href="@Url.Action("CreateClaim", "User", new { ClaimId = item.PolicyId })" class="details-link">Raise Claim</a>
+                                            <a href="@Url.Action("CreateClaim", "User", new { PolicyId = item.PolicyId })" class="details-link">Raise Claim</a>
                   
                                 </td>
                             </tr>

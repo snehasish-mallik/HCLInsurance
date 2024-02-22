@@ -97,7 +97,7 @@ namespace HCLInsurance.Controllers
         public IActionResult PolicyList()
         {
             var userId= HttpContext.Session.GetInt32("UserId");
-            var policyList= dbc.policyModels.Where(x=>x.UserId == userId).ToList();
+            var policyList= dbc.policyModels.Include(x=>x.User).Where(x=>x.UserId== userId).ToList();
             return View(policyList);
         }
 
