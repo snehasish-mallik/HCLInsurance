@@ -27,7 +27,9 @@ namespace HCLInsurance.Models
         [MaxLength(500)] // Adjust the length as needed
         public string? Feedback { get; set; }
 
+        [Range(10000, double.MaxValue, ErrorMessage = "Approved amount must be greater than or equal to 10k.")]
         public decimal? ApprovedAmount { get; set; }
+
 
         [ForeignKey("Policy")]
         public int PolicyId { get; set; }

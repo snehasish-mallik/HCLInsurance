@@ -18,6 +18,7 @@ namespace HCLInsurance.Controllers
             return View();
         }
 
+        [HttpGet]
         public IActionResult LogIn()
         {
             return View();
@@ -117,7 +118,7 @@ namespace HCLInsurance.Controllers
             HttpContext.Session.Clear();
 
             // Redirect to the login page or another desired page after logout
-            return RedirectToAction("LogIn");
+            return RedirectToAction("Index");
 
         }
     }

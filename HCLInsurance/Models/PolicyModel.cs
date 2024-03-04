@@ -20,7 +20,7 @@ namespace HCLInsurance.Models
         public string? Pincode { get; set; }
 
         [Required(ErrorMessage = "Amount is required.")]
-        [Range(0, double.MaxValue, ErrorMessage = "Amount must be a non-negative number.")]
+        [Range(50000, double.MaxValue, ErrorMessage = "Policy amount must be greater than or equal to 50k.")]
         public decimal Amount { get; set; }
 
         [Required(ErrorMessage = "User is required.")]

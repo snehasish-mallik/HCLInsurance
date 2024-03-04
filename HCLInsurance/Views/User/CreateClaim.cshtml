@@ -18,6 +18,11 @@
     <div class="col-md-4">
         <form asp-action="CreateClaim" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group" >
+                <label asp-for="Status" class="control-label">Status:</label>
+                <input asp-for="Status" class="form-control" readonly value="Creating" />
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
 
             <div class="form-group">
                 <label asp-for="PolicyId" class="control-label">Policy ID:</label>
@@ -41,11 +46,7 @@
                 <span asp-validation-for="Reason" class="text-danger"></span>
             </div>
 
-            <div class="form-group">
-                <label asp-for="Status" class="control-label">Status:</label>
-                <input asp-for="Status" class="form-control" readonly value="Creating" />
-                <span asp-validation-for="Status" class="text-danger"></span>
-            </div>
+            
 
             <div class="form-group">
                 <label asp-for="ClaimPercentage" class="control-label">Claim Percentage:</label>

@@ -121,12 +121,22 @@ namespace HCLInsurance.Controllers
 
                 if (existingClaim != null)
                 {
-                    ViewBag.ErrorMessage = "Claim for this Policy already Exists";
+                    TimeSpan claimMonth = DateTime.Now - existingClaim.DateCreated;
+                    bool isgreate = claimMonth.TotalDays > (6 * 30);
+                    if (isgreate)
+                    {
+                        return View();
+                    }
+                    else
+                    {
+                        ViewBag.ErrorMessage = "You have raised a claim for this policy in last six months already";
+                        return View();
+                    }
+                }
+                else
+                {
                     return View();
                 }
-
-                
-                return View();
             }
             else
             {
@@ -151,12 +161,29 @@ namespace HCLInsurance.Controllers
                 }
 
                 var existingClaim = dbc.claimModels.FirstOrDefault(x => x.PolicyId == claim.PolicyId);
+                TimeSpan claimMonth = DateTime.Now - existingClaim.DateCreated;
 
                 if (existingClaim != null)
                 {
-                    ViewBag.ErrorMessage = "Claim for this Policy already Exists";
-                    return View(claim);
+                    bool isgreate = claimMonth.TotalDays > (6 * 30);
+                    if (isgreate)
+                    {
+                        existingClaim.DateCreated = DateTime.Now;
+                        existingClaim.ClaimPercentage = claim.ClaimPercentage;
+                        existingClaim.ClaimAmount = policy.Amount * ((claim.ClaimPercentage) / 100);
+                        existingClaim.Status = "Under Review";
+                        existingClaim.ApprovedAmount = null;
+                        existingClaim.Feedback = null;
+                        dbc.SaveChanges();
+                        return RedirectToAction("ViewClaimHistory");
+                    }
+                    else
+                    {
+                        ViewBag.ErrorMessage = "You have raised a claim for this policy in last six months already";
+                        return View(claim);
+                    }
                 }
+                
 
                 claim.ClaimAmount = policy.Amount * ((claim.ClaimPercentage)/100);
                 claim.Status = "Under Review";
